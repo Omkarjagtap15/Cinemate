@@ -1,0 +1,16 @@
+{
+  "name": "cinemate-workspace",
+  "version": "1.0.0",
+  "description": "Cinemate - AI-Powered Movie Discovery & Recommendation Platform",
+  "private": true,
+  "scripts": {
+    "server:start": "cd server && npm start",
+    "server:dev": "cd server && npm run dev",
+    "client:start": "cd Cinemate-main/cinema-main && npm start",
+    "test": "cd server && npm test",
+    "benchmark:cache": "node tests/load/search-cache-benchmark.js",
+    "benchmark:ratelimit": "node tests/load/rate-limit-test.js",
+    "benchmark:recs": "node tests/load/recommendation-benchmark.js",
+    "benchmark:ai": "node evaluation/evaluate-search.js"
+  }
+}

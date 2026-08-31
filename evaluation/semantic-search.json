@@ -1,0 +1,127 @@
+[
+  {
+    "id": 1,
+    "query": "mind-bending psychological thrillers with unexpected plot twists",
+    "relevant_movies": ["Fight Club", "Inception", "Shutter Island", "The Prestige", "Memento", "Interstellar", "Se7en"]
+  },
+  {
+    "id": 2,
+    "query": "deep space exploration human survival and emotional connection",
+    "relevant_movies": ["Interstellar", "The Martian", "Gravity", "Arrival", "Solaris", "Ad Astra", "2001: A Space Odyssey"]
+  },
+  {
+    "id": 3,
+    "query": "heartwarming animated movies about family friendship and growing up",
+    "relevant_movies": ["Coco", "Inside Out", "Up", "Toy Story", "Spirited Away", "Finding Nemo", "Ratatouille"]
+  },
+  {
+    "id": 4,
+    "query": "gritty mafia crime dramas about power betrayal and family loyalty",
+    "relevant_movies": ["The Godfather", "The Godfather Part II", "GoodFellas", "Scarface", "Casino", "The Departed", "The Irishman"]
+  },
+  {
+    "id": 5,
+    "query": "cyberpunk dystopian future artificial intelligence and humanity",
+    "relevant_movies": ["Blade Runner 2049", "The Matrix", "Ex Machina", "Her", "Blade Runner", "Ghost in the Shell", "Minority Report"]
+  },
+  {
+    "id": 6,
+    "query": "epic medieval fantasy wars heroic quests and ancient magic",
+    "relevant_movies": ["The Lord of the Rings: The Fellowship of the Ring", "The Lord of the Rings: The Return of the King", "The Lord of the Rings: The Two Towers", "Gladiator", "Braveheart"]
+  },
+  {
+    "id": 7,
+    "query": "intense courtroom crime dramas and fight for legal justice",
+    "relevant_movies": ["12 Angry Men", "To Kill a Mockingbird", "A Few Good Men", "Primal Fear", "The Trial of the Chicago 7"]
+  },
+  {
+    "id": 8,
+    "query": "superhero dark knight vigilance moral chaos and Gotham City",
+    "relevant_movies": ["The Dark Knight", "The Batman", "The Dark Knight Rises", "Batman Begins", "Joker"]
+  },
+  {
+    "id": 9,
+    "query": "time travel paradoxes changing past and alternate timelines",
+    "relevant_movies": ["Back to the Future", "Tenet", "Predestination", "Looper", "Primer", "Interstellar", "12 Monkeys"]
+  },
+  {
+    "id": 10,
+    "query": "chilling serial killer investigations dark noir murder mysteries",
+    "relevant_movies": ["Se7en", "Zodiac", "The Silence of the Lambs", "Prisoners", "Memories of Murder", "Gone Girl"]
+  },
+  {
+    "id": 11,
+    "query": "uplifting prison escape hope resilience and lifelong brotherhood",
+    "relevant_movies": ["The Shawshank Redemption", "The Green Mile", "Papillon", "Escape from Alcatraz"]
+  },
+  {
+    "id": 12,
+    "query": "haunting psychological horror haunted house grief and supernatural demons",
+    "relevant_movies": ["The Shining", "Hereditary", "The Conjuring", "The Babadook", "Insidious", "A Quiet Place"]
+  },
+  {
+    "id": 13,
+    "query": "intense World War II battlefield sacrifice and heroism",
+    "relevant_movies": ["Saving Private Ryan", "Dunkirk", "1917", "Hacksaw Ridge", "Schindler's List", "Inglourious Basterds"]
+  },
+  {
+    "id": 14,
+    "query": "high stakes bank heist criminal masterminds and cat and mouse police chase",
+    "relevant_movies": ["Heat", "The Dark Knight", "Baby Driver", "Inception", "Ocean's Eleven", "The Town"]
+  },
+  {
+    "id": 15,
+    "query": "alien first contact linguistics and global communication crisis",
+    "relevant_movies": ["Arrival", "Contact", "Close Encounters of the Third Kind", "Interstellar", "District 9"]
+  },
+  {
+    "id": 16,
+    "query": "social inequality class division greed and dark dark satire",
+    "relevant_movies": ["Parasite", "Triangle of Sadness", "Snowpiercer", "The Platform", "Joker"]
+  },
+  {
+    "id": 17,
+    "query": "multiverse dimensions quantum reality and infinite parallel lives",
+    "relevant_movies": ["Everything Everywhere All at Once", "Spider-Man: Into the Spider-Verse", "Doctor Strange in the Multiverse of Madness", "Spider-Man: Across the Spider-Verse"]
+  },
+  {
+    "id": 18,
+    "query": "whimsical romantic comedy destiny soulmates and Paris romance",
+    "relevant_movies": ["Amélie", "Midnight in Paris", "Before Sunrise", "La La Land", "About Time"]
+  },
+  {
+    "id": 19,
+    "query": "brutal martial arts action revenge choreography and unstoppable assassins",
+    "relevant_movies": ["John Wick", "The Raid", "Kill Bill: Vol. 1", "John Wick: Chapter 4", "Ip Man"]
+  },
+  {
+    "id": 20,
+    "query": "corporate financial greed Wall Street decadence and ambition",
+    "relevant_movies": ["The Wolf of Wall Street", "The Big Short", "Wall Street", "Margin Call", "Boiler Room"]
+  },
+  {
+    "id": 21,
+    "query": "deep ocean mysterious creatures undersea exploration and isolation",
+    "relevant_movies": ["The Abyss", "Underwater", "Avatar: The Way of Water", "Titanic", "Deep Blue Sea"]
+  },
+  {
+    "id": 22,
+    "query": "obsessive musical genius toxic mentorship and pursuit of perfection",
+    "relevant_movies": ["Whiplash", "Black Swan", "Amadeus", "Tar", "The Prestige"]
+  },
+  {
+    "id": 23,
+    "query": "post-apocalyptic desert survival vehicular combat and warlords",
+    "relevant_movies": ["Mad Max: Fury Road", "Furiosa: A Mad Max Saga", "The Road", "Book of Eli", "Dune"]
+  },
+  {
+    "id": 24,
+    "query": "unreliable narrator fake realities and constructed suburban worlds",
+    "relevant_movies": ["The Truman Show", "Fight Club", "The Matrix", "The Game", "Vanilla Sky"]
+  },
+  {
+    "id": 25,
+    "query": "historical biographical drama atomic bomb scientific discovery and moral guilt",
+    "relevant_movies": ["Oppenheimer", "The Imitation Game", "A Beautiful Mind", "The Theory of Everything"]
+  }
+]
