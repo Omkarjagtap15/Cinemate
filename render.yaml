@@ -3,7 +3,7 @@ services:
     name: cinemate-fullstack
     env: node
     plan: free
-    buildCommand: npm run build
+    buildCommand: CI=false npm run build
     startCommand: npm start
     envVars:
       - key: NODE_ENV

@@ -4,6 +4,7 @@ WORKDIR /app/client
 COPY Cinemate-main/cinema-main/package*.json ./
 RUN npm install
 COPY Cinemate-main/cinema-main/ ./
+ENV CI=false
 RUN npm run build
 
 # Stage 2: Production Server
