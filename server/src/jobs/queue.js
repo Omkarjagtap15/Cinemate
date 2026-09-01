@@ -105,13 +105,18 @@ module.exports = {
   ingestionQueue,
   embeddingQueue,
   recommendationQueue,
+  queues: {
+    ingestionQueue,
+    embeddingQueue,
+    recommendationQueue,
+  },
   redisConnection,
   Worker,
   getQueueMetrics: async () => {
     return {
-      ingestion: await ingestionQueue.getMetrics?.() || { name: 'movie-ingestion' },
-      embedding: await embeddingQueue.getMetrics?.() || { name: 'embedding-generation' },
-      recommendation: await recommendationQueue.getMetrics?.() || { name: 'recommendation-refresh' },
+      ingestion: (await ingestionQueue?.getMetrics?.()) || { name: 'movie-ingestion' },
+      embedding: (await embeddingQueue?.getMetrics?.()) || { name: 'embedding-generation' },
+      recommendation: (await recommendationQueue?.getMetrics?.()) || { name: 'recommendation-refresh' },
     };
   },
 };

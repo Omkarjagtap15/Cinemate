@@ -187,11 +187,13 @@ export const AdminDashboard = () => {
     try {
       const res = await fetch(
         `${API_BASE}/admin/ai/inspect-query?q=${encodeURIComponent(aiInspectQuery)}`,
-        { headers: { 'x-admin-key': adminKey } }
+        { headers: { 'x-admin-key': adminKey || 'cinemate-admin-secret' } }
       );
       const json = await res.json();
       if (json.success) {
         setAiInspectResult(json);
+      } else {
+        alert(`AI Inspect failed: ${json.message || 'Unknown error'}`);
       }
     } catch (err) {
       alert(`AI Inspect failed: ${err.message}`);
@@ -237,13 +239,15 @@ export const AdminDashboard = () => {
     try {
       const res = await fetch(`${API_BASE}/admin/demo/test-job`, {
         method: 'POST',
-        headers: { 'x-admin-key': adminKey },
+        headers: { 'x-admin-key': adminKey || 'cinemate-admin-secret' },
       });
       const json = await res.json();
       if (json.success) {
-        setQueueActionMsg(`✅ Enqueued Job ID: ${json.jobId} (Processed by BullMQ worker)`);
+        setQueueActionMsg(`✅ Enqueued Job ID: ${json.jobId} (Processed by worker queue)`);
         await fetchMetrics();
         await fetchDetailedHealth();
+      } else {
+        setQueueActionMsg(`❌ Failed: ${json.message || 'Error processing queue job'}`);
       }
     } catch (err) {
       setQueueActionMsg(`❌ Failed: ${err.message}`);

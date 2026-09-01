@@ -36,6 +36,15 @@ CREATE TABLE IF NOT EXISTS movies (
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
+-- pgvector embedding columns if vector extension enabled
+DO $$
+BEGIN
+    IF EXISTS (SELECT 1 FROM pg_extension WHERE extname = 'vector') THEN
+        ALTER TABLE movies ADD COLUMN IF NOT EXISTS embedding vector(1536);
+        ALTER TABLE movies ADD COLUMN IF NOT EXISTS embedding_status VARCHAR(50) DEFAULT 'PENDING';
+    END IF;
+END $$;
+
 -- 3. Favorites Table (User-Movie relational join)
 CREATE TABLE IF NOT EXISTS favorites (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),

@@ -113,14 +113,93 @@ class MovieRepository {
   }
 
   /**
+   * Retrieve all indexed movies with guaranteed embeddings
+   */
+  async getAllIndexedMovies() {
+    // If in-memory store has indexed movies with embeddings, use them
+    const memoryList = Array.from(memoryMovies.values());
+    if (memoryList.length > 0 && memoryList.some((m) => m.embedding && m.embedding.length > 0)) {
+      return memoryList;
+    }
+
+    // Otherwise load from database and populate embeddings
+    if (isDatabaseConnected() && pool) {
+      try {
+        const res = await pool.query('SELECT * FROM movies ORDER BY popularity DESC LIMIT 200');
+        if (res.rows.length > 0) {
+          for (const row of res.rows) {
+            const genres = typeof row.genres === 'string' ? JSON.parse(row.genres) : (row.genres || []);
+            const castMembers = typeof row.cast_members === 'string' ? JSON.parse(row.cast_members) : (row.cast_members || []);
+
+            let embedding = null;
+            if (row.embedding) {
+              if (Array.isArray(row.embedding)) {
+                embedding = row.embedding;
+              } else if (typeof row.embedding === 'string') {
+                embedding = row.embedding.replace(/[\[\]]/g, '').split(',').map(Number);
+              }
+            }
+
+            if (!embedding || embedding.length === 0) {
+              const searchableText = `Title: ${row.title}. Genres: ${genres.map((g) => (typeof g === 'object' ? g.name : g)).join(', ')}. Director: ${row.director || ''}. Overview: ${row.overview || ''} Tagline: ${row.tagline || ''}`;
+              embedding = await embeddingService.generateEmbedding(searchableText);
+            }
+
+            const movieObj = {
+              id: row.tmdb_id,
+              tmdb_id: row.tmdb_id,
+              title: row.title,
+              overview: row.overview,
+              tagline: row.tagline,
+              release_date: row.release_date,
+              poster_path: row.poster_path,
+              backdrop_path: row.backdrop_path,
+              genres,
+              cast_members: castMembers,
+              director: row.director,
+              runtime: row.runtime,
+              budget: row.budget,
+              revenue: row.revenue,
+              vote_average: parseFloat(row.vote_average) || 0,
+              vote_count: row.vote_count,
+              popularity: parseFloat(row.popularity) || 0,
+              embedding,
+            };
+            memoryMovies.set(row.tmdb_id, movieObj);
+          }
+          return Array.from(memoryMovies.values());
+        }
+      } catch (err) {
+        logger.warn('Database error in getAllIndexedMovies:', { error: err.message });
+      }
+    }
+
+    // Seed fallback movies so vector search always works instantly
+    try {
+      const { SEED_MOVIES } = require('../database/seed');
+      if (SEED_MOVIES && SEED_MOVIES.length > 0) {
+        for (const seedMovie of SEED_MOVIES) {
+          await this.upsertMovie(seedMovie);
+        }
+      }
+    } catch (e) {
+      logger.warn('Could not load seed movies fallback:', { error: e.message });
+    }
+
+    return Array.from(memoryMovies.values());
+  }
+
+  /**
    * Vector similarity search using cosine distance
    */
   async searchByVector(queryEmbedding, limit = 20) {
-    const all = await this.getAllMovies();
+    const all = await this.getAllIndexedMovies();
     if (all.length === 0) return [];
 
     const scored = all.map((movie) => {
-      const similarity = embeddingService.cosineSimilarity(queryEmbedding, movie.embedding);
+      const similarity = movie.embedding
+        ? embeddingService.cosineSimilarity(queryEmbedding, movie.embedding)
+        : 0;
       return {
         ...movie,
         similarityScore: parseFloat(similarity.toFixed(4)),

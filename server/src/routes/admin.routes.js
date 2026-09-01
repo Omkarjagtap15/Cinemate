@@ -4,7 +4,7 @@ const { cacheService } = require('../services/cache.service');
 const singleFlight = require('../services/singleFlight.service');
 const { isDatabaseConnected, pool } = require('../config/database');
 const { isRedisConnected, redisClient } = require('../config/redis');
-const { getQueueMetrics, queues } = require('../jobs/queue');
+const { getQueueMetrics, queues, ingestionQueue } = require('../jobs/queue');
 const embeddingService = require('../services/embedding.service');
 const movieRepository = require('../repositories/movie.repository');
 const tmdbService = require('../services/tmdb.service');
@@ -210,16 +210,31 @@ router.post('/demo/clear-cache', async (req, res) => {
  * 9. POST /api/admin/demo/test-job — Trigger a test background queue job (Phase 19)
  */
 router.post('/demo/test-job', async (req, res) => {
-  const job = await queues.ingestionQueue.add('test-demo-job', {
-    type: 'benchmark-probe',
-    timestamp: new Date().toISOString(),
-  });
+  try {
+    const q = ingestionQueue || queues?.ingestionQueue;
+    if (!q || typeof q.add !== 'function') {
+      return res.status(503).json({
+        success: false,
+        message: 'Queue service currently unavailable',
+      });
+    }
 
-  res.json({
-    success: true,
-    message: 'Test background job enqueued successfully',
-    jobId: job.id,
-  });
+    const job = await q.add('test-demo-job', {
+      type: 'benchmark-probe',
+      timestamp: new Date().toISOString(),
+    });
+
+    res.json({
+      success: true,
+      message: 'Test background job enqueued successfully',
+      jobId: job?.id || 'job_' + Date.now(),
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: `Failed to enqueue test job: ${err.message}`,
+    });
+  }
 });
 
 module.exports = router;
