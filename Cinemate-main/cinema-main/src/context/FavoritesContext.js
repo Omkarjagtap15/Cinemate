@@ -2,7 +2,7 @@ import { createContext, useEffect, useState, useCallback } from "react";
 
 export const FavoritesContext = createContext();
 
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:5000/api";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "/api";
 
 const getUserId = () => {
   let userId = localStorage.getItem("cinemate_user_id");

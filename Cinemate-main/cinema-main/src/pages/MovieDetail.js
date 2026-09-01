@@ -4,7 +4,7 @@ import { useTitle } from "../hooks/useTitle";
 import { CastCard, RatingRing, TrailerModal, Card } from "../components";
 import Backup from "../assets/backup.png";
 
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:5000/api";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "/api";
 
 export const MovieDetail = () => {
   const { id } = useParams();

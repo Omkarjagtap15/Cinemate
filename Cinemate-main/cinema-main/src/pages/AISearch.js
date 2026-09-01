@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Card, SkeletonCard } from "../components";
 import { useTitle } from "../hooks/useTitle";
 
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:5000/api";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "/api";
 
 const PRESET_QUERIES = [
   "Mind-bending psychological thrillers with unexpected plot twists",
